@@ -1,0 +1,31 @@
+{
+	"name": "diceapp",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc",
+		"dev": "ts-node-dev src/index.ts",
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/christopherbauer/diceapp.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/christopherbauer/diceapp/issues"
+	},
+	"homepage": "https://github.com/christopherbauer/diceapp#readme",
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"typescript": "^4.9.4"
+	},
+	"devDependencies": {
+		"jest": "^29.3.1",
+		"ts-node-dev": "^2.0.0"
+	}
+}
