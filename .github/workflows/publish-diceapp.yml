@@ -27,7 +27,7 @@ jobs:
               id: publish
               uses: ./.github/actions/ecr-push
               with:
-                  dockerfile-path: ./diceapp/Dockerfile
+                  dockerfile-path: ./api/Dockerfile
                   repository: diceapp
                   environment: development
                   aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
