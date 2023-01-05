@@ -7,6 +7,7 @@ console.log(parsedEnvironment);
 app.use((request: Request, response: Response, next: NextFunction) => {
 	let { method, path } = request;
 
+	//Testing GA
 	console.log(`BEGIN REQUEST: ${method} ${path}`);
 	var loggerData = JSON.parse(
 		JSON.stringify({
