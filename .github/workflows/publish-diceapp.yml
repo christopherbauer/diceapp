@@ -1,0 +1,36 @@
+name: Update Diceapp Image
+run-name: ${{ github.actor }} is building diceapp
+on:
+    push:
+        paths:
+            - diceapp/**
+        branches:
+            - main
+            - develop
+jobs:
+    push-image:
+        name: Build Image
+        runs-on: ubuntu-latest
+        environment: development
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+
+            - name: Get package version
+              id: package-version
+              uses: martinbeentjes/npm-get-version-action@v1.2.3
+              with:
+                  path: ./diceapp
+
+            - name: "ECR Build, Tag and Push"
+              id: publish
+              uses: ./.github/actions/ecr-push
+              with:
+                  dockerfile-path: ./diceapp/Dockerfile
+                  repository: diceapp
+                  environment: development
+                  aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+                  aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+                  aws-region: us-east-2
+                  package-version: ${{ steps.package-version.outputs.current-version }}
