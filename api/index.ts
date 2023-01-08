@@ -1,4 +1,4 @@
-import express, { Error, Response, Request, NextFunction } from "express";
+import express, { Response, Request, NextFunction, json } from "express";
 import { config } from "dotenv";
 const app = express();
 
@@ -7,7 +7,6 @@ console.log(parsedEnvironment);
 app.use((request: Request, response: Response, next: NextFunction) => {
 	let { method, path } = request;
 
-	//Testing GA
 	console.log(`BEGIN REQUEST: ${method} ${path}`);
 	var loggerData = JSON.parse(
 		JSON.stringify({
@@ -23,8 +22,15 @@ app.use((request: Request, response: Response, next: NextFunction) => {
 	next();
 });
 
+//health check endpoint
+app.get("/", json(), (request, response) => {
+	response.status(200).send({
+		live: true,
+	});
+});
+
 //If the requested route is not otherwise handled
-app.all("*", async (request, result, next) => {
+app.all("*", async (_request, _result) => {
 	throw new Error("Route not found");
 });
 app.use(
