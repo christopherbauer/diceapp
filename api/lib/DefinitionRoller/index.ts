@@ -1,6 +1,6 @@
 import logger from "../logger";
 import { IOutcome } from "../types";
-import { IRoller } from "../Roller/types";
+import { IRoller } from "../Roller";
 
 export class DefinitionRoller {
 	roller: IRoller;

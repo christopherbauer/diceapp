@@ -1,6 +1,9 @@
 import logger from "../logger";
 import { IRandomizer } from "../Randomizer";
-import { IRoller } from "./types";
+export interface IRoller {
+	rollDie: (die: number) => number;
+	rollMultipleDie: (count: number, die: number) => number[];
+}
 
 export class Roller implements IRoller {
 	randomizer: IRandomizer;
@@ -17,5 +20,3 @@ export class Roller implements IRoller {
 		return rolls;
 	};
 }
-
-export { IRoller };
