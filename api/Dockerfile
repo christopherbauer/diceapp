@@ -5,7 +5,7 @@ RUN apk update
 RUN apk add nano openssl
 
 WORKDIR /app/api
-COPY ./api .
+COPY . .
 RUN npm install --silent --legacy-peer-deps
 
 CMD ["npm", "run", "dev"]

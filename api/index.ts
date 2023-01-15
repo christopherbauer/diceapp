@@ -1,8 +1,8 @@
 import express, { json } from "express";
 import { config } from "dotenv";
-import { errorHandler, requestLogHandler } from "./lib/middlewares";
-import logger from "./lib/logger";
-import { rollRouter } from "./routes";
+import { errorHandler, requestLogHandler } from "./src/lib/middlewares";
+import logger from "./src/lib/logger";
+import { rollRouter } from "./src/routes";
 const app = express();
 
 const parsedEnvironment = config();
@@ -19,7 +19,7 @@ app.get("/", json(), (request, response) => {
 app.use("/rolls", rollRouter);
 
 //If the requested route is not otherwise handled
-app.all("*", async (_request, _result) => {
+app.all("*", (_request, _result) => {
 	throw new Error("Route not found");
 });
 app.use(errorHandler);

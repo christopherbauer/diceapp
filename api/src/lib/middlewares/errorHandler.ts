@@ -10,4 +10,5 @@ export const errorHandler = (
 	response.status(400).send({
 		errors: [{ message: err }],
 	});
+	next();
 };
