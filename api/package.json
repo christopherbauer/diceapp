@@ -4,7 +4,8 @@
 	"description": "",
 	"source": "index.ts",
 	"scripts": {
-		"build": "parcel build",
+		"build": "parcel build index.ts",
+		"build:test": "npm run build && npx http-server ./dist/index.js",
 		"dev": "ts-node-dev --respawn index.ts",
 		"test": "jest --watch"
 	},
