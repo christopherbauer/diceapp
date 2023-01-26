@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  diceapp_api:
+      container_name: diceapp_api
+      build: ./api
+      environment:
+        - PORT=3000
+        - LOG_LEVEL=silly
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./api/src:/app/api/src
+        - ./api/index.ts:/app/api/index.ts

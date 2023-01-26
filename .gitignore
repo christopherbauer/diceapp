@@ -2,6 +2,9 @@
 node_modules
 *.log
 *.gz
+logs
+dist/
+.parcel-cache/
 
 # Local .terraform directories
 **/.terraform/*
