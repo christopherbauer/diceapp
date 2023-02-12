@@ -20,7 +20,7 @@ module "diceapp_ecs" {
   https_security_group_id   = aws_security_group.https.id
 
   internet_gateway_id = aws_internet_gateway.this.id
-  log_region          = "us-east-1"
+  log_region          = "us-east-2"
 
   instance_memory = "1024"
   instance_cpu    = 256

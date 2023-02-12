@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import logger from "../logger";
 
 export const requestLogHandler = (
 	request: Request,
@@ -17,7 +18,7 @@ export const requestLogHandler = (
 			ip: request.connection.remoteAddress,
 		})
 	);
-	console.debug(loggerData);
+	logger.debug(loggerData);
 
 	next();
 };
