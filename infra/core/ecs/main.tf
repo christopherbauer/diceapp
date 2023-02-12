@@ -45,7 +45,7 @@ resource "aws_ecs_task_definition" "this" {
       "logConfiguration" : {
         "logDriver" : "awslogs",
         "options" : {
-          "awslogs-region" : var.region,
+          "awslogs-region" : var.log_region,
           "awslogs-group" : "fargate-logs",
           "awslogs-create-group" : "true",
           "awslogs-stream-prefix" : "${var.app_name}-ecs"

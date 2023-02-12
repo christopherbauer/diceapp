@@ -67,11 +67,25 @@ variable "environment_variables" {
   type        = list(object({ name = string, value = string }))
   description = "Service environment variables"
 }
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
 variable "container_port" {
   type        = number
   description = "Service container port"
+}
+variable "log_region" {
+  type        = string
+  description = "Cloudwatch log region"
+}
+variable "instance_cpu" {
+  description = "Either a string of VCPUs or a number representing cpu units"
+  default     = 256
+}
+variable "instance_memory" {
+  type        = string
+  description = "A string representing memory in MiB"
+  default     = "1024"
+}
+variable "desired_instance_count" {
+  type        = number
+  description = "Desired number of instances to be running at all times"
+  default     = 1
 }

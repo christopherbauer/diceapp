@@ -38,6 +38,3 @@ resource "aws_alb_listener" "api_http" {
     target_group_arn = aws_lb_target_group.this.arn
   }
 }
-output "alb_url" {
-  value = "http://${aws_alb.this.dns_name}"
-}

@@ -58,3 +58,54 @@ resource "aws_iam_user_policy_attachment" "attach_ecr_push_to_ci_user" {
 resource "aws_iam_access_key" "deploy_key" {
   user = aws_iam_user.ci-github-actions.name
 }
+
+resource "aws_iam_role" "container_management" {
+  name = "container_management"
+
+  assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role.json
+
+  tags = {
+    Environment = "corporate"
+    Service     = "deployment"
+  }
+}
+
+data "aws_iam_policy_document" "ecs_task_assume_role" {
+  statement {
+    actions = ["sts:AssumeRole"]
+    effect  = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["ecs.amazonaws.com", "ecs-tasks.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "fargate" {
+  name   = "fargate-execution-role"
+  role   = aws_iam_role.container_management.name
+  policy = data.aws_iam_policy_document.fargate.json
+}
+data "aws_iam_policy_document" "fargate" {
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:BatchGetImage",
+      "logs:CreateLogStream",
+      "logs:CreateLogGroup",
+      "logs:PutLogEvents"
+    ]
+    resources = ["*"]
+  }
+}
+data "aws_iam_policy" "ecs_task_execution_role" {
+  arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
+  role       = aws_iam_role.container_management.name
+  policy_arn = data.aws_iam_policy.ecs_task_execution_role.arn
+}
