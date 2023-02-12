@@ -5,7 +5,7 @@ RUN apk update
 RUN apk add nano openssl
 
 WORKDIR /app/api
-COPY . .
+COPY ./api .
 RUN npm install
 
 CMD ["npm", "run", "dev"]

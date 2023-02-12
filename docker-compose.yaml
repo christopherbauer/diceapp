@@ -2,7 +2,9 @@ version: "3.7"
 services:
   diceapp_api:
       container_name: diceapp_api
-      build: ./api
+      build:
+        context: .
+        dockerfile: ./api/Dockerfile
       environment:
         - PORT=3000
         - LOG_LEVEL=silly
